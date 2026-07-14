@@ -1,8 +1,3 @@
-GitHub README.md 文件已生成完毕。以下是完整内容，您可以直接复制使用：
-
----
-
-```markdown
 # MatBuilder
 
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
