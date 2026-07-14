@@ -1,0 +1,64 @@
+name: strain_batch
+description: Generate uniaxial strain series from -10% to +10%
+steps:
+  - name: load
+    type: load
+    params:
+      file: structs/PCM.vasp
+    output: base
+
+  - name: strain_neg10
+    type: strain
+    params:
+      type: uniaxial
+      direction: a
+      value: -10
+      mode: poisson
+      poisson: 0.3
+      output: PCM_a_-10.vasp
+
+  - name: strain_neg5
+    type: strain
+    params:
+      type: uniaxial
+      direction: a
+      value: -5
+      mode: poisson
+      poisson: 0.3
+      output: PCM_a_-5.vasp
+
+  - name: strain_0
+    type: strain
+    params:
+      type: uniaxial
+      direction: a
+      value: 0
+      mode: standard
+      output: PCM_a_0.vasp
+
+  - name: strain_pos5
+    type: strain
+    params:
+      type: uniaxial
+      direction: a
+      value: 5
+      mode: poisson
+      poisson: 0.3
+      output: PCM_a_+5.vasp
+
+  - name: strain_pos10
+    type: strain
+    params:
+      type: uniaxial
+      direction: a
+      value: 10
+      mode: poisson
+      poisson: 0.3
+      output: PCM_a_+10.vasp
+
+  - name: convert_to_cif
+    type: convert
+    params:
+      format: cif
+      output: PCM_a_+10.cif
+    condition: has.pos10

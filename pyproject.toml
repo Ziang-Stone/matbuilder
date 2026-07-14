@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matbuilder"
+version = "0.6.0"
+description = "Material Structure Modeling Toolkit"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    {name = "MatBuilder Team"}
+]
+dependencies = [
+	"numpy>=1.20.0",
+    "pymatgen>=2023.0.0",
+    "spglib>=2.0.0",
+    "pyyaml>=6.0",
+    "scipy>=1.8.0",
+    "ase>=3.22.0",
+]
+
+[project.optional-dependencies]
+ase = ["ase>=3.22.0"]
+
+[project.scripts]
+matbuilder = "matbuilder.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["matbuilder*"]
+exclude = ["tests*", "docs*", "examples*"]

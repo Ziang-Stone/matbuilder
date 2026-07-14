@@ -1,0 +1,90 @@
+# MatBuilder v0.1.0
+
+Material Structure Modeling Toolkit — 交互式晶体结构建模工具包
+
+## Quick Start
+
+```bash
+pip install -r requirements.txt
+mkdir structs && cp your_structure.vasp structs/PCM.vasp
+python run.py
+
+
+MatBuilder/
+├── run.py                           # 用户入口
+├── pyproject.toml                   # 项目配置
+├── requirements.txt
+├── README.md
+├── structs/                         # 用户自建
+│   └── PCM.vasp
+├── src/
+│   └── matbuilder/
+│       ├── __init__.py
+│       ├── _version.py
+│       ├── main.py                  # 编程入口
+│       ├── cli.py                   # 交互式 CLI
+│       │
+│       ├── core/                    # 核心框架（简化）
+│       │   ├── __init__.py
+│       │   ├── base.py              # Module 基类 + Backend 基类
+│       │   ├── context.py           # 运行时上下文
+│       │   ├── registry.py          # 模块自动注册
+│       │   └── pipeline.py          # 执行器
+│       │
+│       ├── backends/                # 后端适配
+│       │   ├── __init__.py
+│       │   ├── base.py
+│       │   ├── pymatgen.py
+│       │   └── factory.py
+│       │
+│       ├── config/                  # 配置管理
+│       │   ├── __init__.py
+│       │   └── settings.py
+│       │
+│       ├── utils/                   # 工具集
+│       │   ├── __init__.py
+│       │   ├── logging.py
+│       │   └── validators.py
+│       │
+│       └── modules/                 # 业务模块
+│           ├── __init__.py
+│           ├── base.py
+│           ├── strain/              # ✅ 完整可用
+│           │   ├── __init__.py
+│           │   ├── models.py
+│           │   ├── operations.py
+│           │   └── module.py
+│           ├── transform/           # 🚧 stub
+│           │   ├── __init__.py
+│           │   └── module.py
+│           ├── convert/             # 🚧 stub
+│           │   ├── __init__.py
+│           │   └── module.py
+│           └── bend/                # 🚧 stub
+│               ├── __init__.py
+│               └── module.py
+
+********************安装和使用方法*************
+
+# 1. 安装
+cd MatBuilder
+pip install -e .           #开发模式安装（editable install）,以开发模式将当前项目安装到 Python 环境中，使得：1、代码修改即时生效 — 你修改 src/matbuilder/ 下的任何 .py 文件后，不需要重新安装，直接运行 python run.py 或 matbuilder 就能看到最新效果。 2、保留源码位置 — Python 实际引用的是你硬盘上的源码路径，而不是复制到 site-packages 里的副本
+3、生成入口命令 — 根据 pyproject.toml 中的 [project.scripts]，在环境 bin/ 目录下创建 matbuilder 命令
+
+# 2. 准备结构
+mkdir structs
+cp your_structure.vasp structs/PCM.vasp
+
+# 3. 运行
+python run.py
+# 或
+matbuilder
+
+
+| 设计目标     | 验证方式                                               |
+| -------- | -------------------------------------------------- |
+| **后端解耦** | `backends/pymatgen.py` 可独立替换，不影响 `modules/strain/` |
+| **自动注册** | 新增模块继承 `ModuleBase` 即可自动出现在主菜单                     |
+| **交互式**  | `StrainModule.run_interactive()` 完全自包含菜单逻辑         |
+| **编程式**  | `main.py` 预留了 `module.run(context)` 非交互入口          |
+| **扩展性**  | `operations.py` 的应变矩阵与后端无关，可独立测试                   |

@@ -1,0 +1,10 @@
+matbuilder/
+├── core/        # 框架基类、上下文、注册器、执行器
+├── backends/    # pymatgen 适配器（ASE 预留）
+├── config/      # Pydantic 配置
+├── utils/       # 日志、校验
+└── modules/     # 业务模块
+    ├── strain/      ✅ 单轴/双轴/剪切/纯剪切/静水压 + 泊松修正 + 体积守恒
+    ├── transform/   🚧 预留
+    ├── convert/     🚧 预留
+    └── bend/        🚧 预留
