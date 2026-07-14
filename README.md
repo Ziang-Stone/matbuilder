@@ -230,8 +230,6 @@ MatBuilder/
 ## 文档
 
 - [完整安装与使用手册](docs/MatBuilder_v0.6.0_完整安装与使用手册.md)
-- [滑移铁电DFT计算指南](docs/滑移铁电的VASP计算流程说明.md)
-- [API 文档](docs/API.md) (开发中)
 
 ---
 
